@@ -8,10 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* ==================================================================
-           COMBINED CSS
-           ================================================================== */
-
         /* --- Global Styles --- */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
@@ -34,19 +30,6 @@
             min-height: 100vh;
         }
 
-        /* View Switching Logic */
-        .view-section {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-        .view-section.active {
-            display: block;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         a {
             color: var(--primary-blue);
             text-decoration: none;
@@ -59,8 +42,7 @@
             opacity: 0.8;
         }
 
-        /* --- INDEX.HTML STYLES --- */
-        
+        /* --- TOP BAR & LOGOS --- */
         .top-bar {
             position: fixed;
             top: 0; left: 0;
@@ -130,6 +112,7 @@
             100% { transform: translateX(-50%); }
         }
 
+        /* --- MAIN CONTENT & HEADER --- */
         .main-content {
             padding: 40px 20px;
             margin-top: 70px;
@@ -141,7 +124,7 @@
         header {
             text-align: center;
             max-width: 800px;
-            margin: 20px auto 40px auto; /* Reduced from 70px top / 60px bottom */
+            margin: 20px auto 40px auto;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -166,6 +149,7 @@
             color: #495057;
         }
 
+        /* --- CATEGORIES --- */
         .categories {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -211,6 +195,7 @@
             transform: translateX(5px);
         }
 
+        /* --- HIGHLIGHTS --- */
         .project-highlights {
             max-width: 1100px;
             margin: 0 auto 80px auto;
@@ -270,1203 +255,113 @@
             line-height: 1.3;
         }
 
-        /* --- PERSONAL & SCHOOL PAGES STYLES --- */
-        .back-link {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-            transition: color 0.2s ease;
-            cursor: pointer;
-        }
-        .back-link:hover { color: var(--primary-blue); opacity: 1; }
-        
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* --- MODIFIED: Personal Projects Vertical Stack --- */
-        #view-personal .projects {
-            grid-template-columns: 1fr; /* Stack vertically */
-            max-width: 900px; /* Constrain width */
-        }
-
-        /* Card Styles */
-        .card {
-            background: var(--card-background);
-            border: 1px solid var(--border-color);
-            padding: 20px;
-            border-radius: 14px;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        }
-        #view-personal .card:hover { transform: none; }
-        #view-school .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 6px 20px rgba(0, 0, 255, 0.15);
-        }
-
-        .card img.static-img { width: 100%; border-radius: 10px; margin-bottom: 15px; }
-        .meta { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px; font-style: italic; }
-        .card p { margin-bottom: 10px; color: #495057; }
-        .card strong { color: var(--primary-blue); font-weight: 600; display: block; margin-bottom: 5px; }
-        .links { margin-top: auto; }
-        
-        .card p a {
-            color: var(--text-primary);
-            font-weight: 400;
-            text-decoration: underline;
-            transition: color 0.2s ease, opacity 0.2s ease;
-        }
-        .card p a:hover {
-            color: var(--primary-blue);
-            opacity: 1;
-            text-decoration: underline;
-        }
-
-        /* --- NEW PERSONAL DROPDOWN STYLES --- */
-        .personal-description-wrapper {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.6s ease-in-out, opacity 0.4s ease-in-out;
-            opacity: 0;
-        }
-        .card.expanded .personal-description-wrapper {
-            max-height: 4000px;
-            opacity: 1;
-        }
-        
-        .personal-toggle-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            cursor: pointer;
-            color: var(--primary-blue);
-            font-weight: 500;
-            transition: background-color 0.2s ease;
-        }
-        .personal-toggle-bar:hover { background-color: #e9ecef; }
-        .personal-toggle-icon { margin-left: 8px; transition: transform 0.3s ease; }
-        .card.expanded .personal-toggle-icon { transform: rotate(180deg); }
-
-        /* Data Table */
-        .data-table {
-            width: 100%; border-collapse: collapse; margin: 15px 0;
-            font-size: 0.85rem; color: #495057;
-        }
-        .data-table th, .data-table td {
-            border: 1px solid var(--border-light); padding: 8px; text-align: center;
-        }
-        .data-table th { background-color: #f1f3f5; font-weight: 600; color: var(--text-primary); }
-        .data-table td:first-child { font-weight: 500; text-align: left; padding-left: 12px; }
-
-        /* --- WORK.HTML SPECIFIC STYLES (Accordion) --- */
-        .project-list { max-width: 900px; margin: 0 auto; list-style: none; }
-        .project-item {
-            background-color: var(--card-background); border: 1px solid var(--border-light);
-            border-radius: 18px; margin-bottom: 30px; overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            transition: box-shadow 0.3s ease, margin-bottom 0.4s ease, border-color 0.4s ease, background-color 0.4s ease;
-        }
-
-        .project-preview {
-            padding: 20px; cursor: pointer; display: flex; align-items: center; gap: 20px;
-            transition: background-color 0.2s ease, opacity 0.4s ease, max-height 0.4s ease, padding 0.4s ease;
-            position: relative; max-height: 200px; opacity: 1;
-        }
-        .project-preview:hover { background-color: #fcfcfc; }
-        
-        .project-list.item-active .project-item:not(.active) .project-preview {
-            opacity: 0; max-height: 0; padding-top: 0; padding-bottom: 0;
-            pointer-events: none; border-width: 0; margin-bottom: 0;
-        }
-        .project-list.item-active .project-item:not(.active) { margin-bottom: 0; box-shadow: none; border-color: transparent; background-color: transparent; }
-        
-        .preview-image-container { width: 100px; height: 100px; border-radius: 12px; overflow: hidden; flex-shrink: 0; position: relative; background-color: #eee; }
-        .preview-image-container img { display: block; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.8s ease-in-out; }
-        .preview-image-container img.active { opacity: 1; }
-        
-        .preview-text { flex-grow: 1; position: relative; }
-        .project-preview h3 { font-size: 1.25rem; font-weight: 500; margin-bottom: 5px; color: var(--text-primary); padding-right: 40px; }
-        .project-preview .meta { font-size: 0.9rem; color: var(--text-secondary); font-style: italic; font-weight: 300; }
-
-        .preview-company-logo {
-            position: absolute;
-            right: 0; top: 50%; transform: translateY(-50%);
-            height: 20px; max-width: 80px; opacity: 0.4; filter: grayscale(100%);
-        }
-        .preview-icon { display: inline-block; font-size: 1.5rem; color: var(--text-secondary); transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); margin-left: 15px; flex-shrink: 0; line-height: 1; transform: rotate(0deg); }
-        .project-item.active .preview-icon { transform: rotate(-180deg); }
-
-        .project-details {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding-top 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding-bottom 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            border-top: 1px solid transparent; padding: 0 30px;
-        }
-        .project-item.active .project-details { max-height: 2500px; padding-top: 30px; padding-bottom: 30px; border-top-color: var(--border-light); }
-        .project-description { margin-top: 30px; }
-        .project-description p { margin-bottom: 15px; color: #495057; font-weight: 300; }
-        .project-description strong { font-weight: 600; color: var(--primary-blue); display: block; margin-bottom: 5px; }
-        .project-description p b { font-weight: 500; color: var(--text-primary); }
-        .details-links { margin-top: 25px; }
-
-        /* --- SLIDESHOW STYLES --- */
-        .slideshow-container { 
-            position: relative; 
-            max-width: 100%; 
-            margin-bottom: 15px;
-            overflow: hidden; 
-            border-radius: 12px;
-            background-color: #ffffff; /* Changed to pure white */
-            transition: height 0.45s cubic-bezier(0.2,0,0.2,1);
-        }
-        .personal-slide { display: none; width: 100%; animation: fadeEffect 0.8s ease; }
-        
-        /* FIX: contain object fit + fixed height to allow full visibility for tall images */
-        .personal-slide img { 
-            display: block; 
-            width: 100%; 
-            height: 550px; /* Increased height to prevent jumping */
-            object-fit: contain; 
-            object-position: center;
-        }
-        .personal-slide.active { display: block; }
-
-        .work-slide {
-            position: absolute; left: 0; top: 0; width: 100%;
-            opacity: 0; transition: opacity 0.55s ease; pointer-events: none;
-        }
-        .work-slide img { display: block; width: 100%; height: auto; object-fit: contain; }
-        .work-slide.active { opacity: 1; pointer-events: auto; }
-
-        @keyframes fadeEffect { from { opacity: 0.4; } to { opacity: 1; } }
-        
-        .prev, .next { 
-            cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto; padding: 16px; color: #333; font-weight: bold; font-size: 20px; background-color: rgba(255, 255, 255, 0.5); border-radius: 0 3px 3px 0; user-select: none; transition: background-color 0.3s ease; z-index: 10;
-        }
-        .next { right: 0; border-radius: 3px 0 0 3px; }
-        .prev:hover, .next:hover { background-color: rgba(255, 255, 255, 0.8); }
-
-        .caption-container { 
-            text-align: center; padding: 10px 0 5px 0; color: var(--text-secondary); font-size: 0.9rem; min-height: 1.5em; font-style: italic; transition: opacity 0.15s ease-in-out; 
-        }
-
-        /* --- Footer --- */
+        /* --- FOOTER --- */
         footer {
-            margin-top: 80px; padding-top: 30px; border-top: 1px solid #e0e0e0;
-            color: #6c757d; font-size: 0.9rem; text-align: center;
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-align: center;
         }
         footer p { margin-bottom: 10px; }
         
-        /* --- Responsive --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .top-bar { height: auto; flex-direction: column; position: static; }
             .static-nav-links { width: 100%; justify-content: center; padding: 10px; border-bottom: 1px solid var(--border-light); }
             .scrolling-logos { -webkit-mask-image: none; mask-image: none; padding: 20px 0; margin-bottom: 0; }
             .main-content { margin-top: 0; }
-            .projects { grid-template-columns: 1fr; }
-            #view-personal .projects { max-width: 100%; }
-            
-            .project-preview { padding: 15px; gap: 15px; }
-            .project-item.active .project-details { padding: 20px; } 
-            .preview-image-container { width: 70px; height: 70px; }
-            .project-preview h3 { font-size: 1.1rem; padding-right: 30px; } 
-            .preview-company-logo { height: 16px; } 
-            .prev, .next { font-size: 16px; padding: 12px; }
-            .personal-slide img { height: 300px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- =================================================================
-         VIEW: INDEX.HTML
-         ================================================================= -->
-    <div id="view-index" class="view-section active">
-        <div class="top-bar">
-            <nav class="static-nav-links">
-                <a href="images/resume.pdf" target="_blank">Resume</a>
-                <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
-                <a href="mailto:thomaswatson1188@gmail.com">Email</a>
-            </nav>
-            
-            <section class="scrolling-logos" aria-label="Featured Companies and Organizations">
-                <div class="logos-scroller">
-                    <a href="#" title="Tesla"><img src="images/logo-tesla.png" alt="Tesla logo" onerror="this.src='https://placehold.co/140x35?text=Tesla'"></a>
-                    <a href="#" title="Lockheed Martin"><img src="images/logo-lockheed.png" alt="Lockheed logo" onerror="this.src='https://placehold.co/140x35?text=Lockheed'"></a>
-                    <a href="#" title="RTX"><img src="images/logo-rtx.png" alt="RTX logo" onerror="this.src='https://placehold.co/140x35?text=RTX'"></a>
-                    <a href="#" title="Dalhousie"><img src="images/logo-dalhousie.png" alt="Dalhousie logo" onerror="this.src='https://placehold.co/140x35?text=Dalhousie'"></a>
-                    <a href="#" title="DALIS"><img src="images/logo-dalis.png" alt="DALIS logo" onerror="this.src='https://placehold.co/140x35?text=DALIS'"></a>
-                    <!-- Duplicates for loop -->
-                    <a href="#" title="Tesla"><img src="images/logo-tesla.png" alt="Tesla logo" onerror="this.src='https://placehold.co/140x35?text=Tesla'"></a>
-                    <a href="#" title="Lockheed Martin"><img src="images/logo-lockheed.png" alt="Lockheed logo" onerror="this.src='https://placehold.co/140x35?text=Lockheed'"></a>
-                    <a href="#" title="RTX"><img src="images/logo-rtx.png" alt="RTX logo" onerror="this.src='https://placehold.co/140x35?text=RTX'"></a>
-                    <a href="#" title="Dalhousie"><img src="images/logo-dalhousie.png" alt="Dalhousie logo" onerror="this.src='https://placehold.co/140x35?text=Dalhousie'"></a>
-                    <a href="#" title="DALIS"><img src="images/logo-dalis.png" alt="DALIS logo" onerror="this.src='https://placehold.co/140x35?text=DALIS'"></a>
-                    <a href="#" title="Tesla"><img src="images/logo-tesla.png" alt="Tesla logo" onerror="this.src='https://placehold.co/140x35?text=Tesla'"></a>
-                    <a href="#" title="Lockheed Martin"><img src="images/logo-lockheed.png" alt="Lockheed logo" onerror="this.src='https://placehold.co/140x35?text=Lockheed'"></a>
-                    <a href="#" title="RTX"><img src="images/logo-rtx.png" alt="RTX logo" onerror="this.src='https://placehold.co/140x35?text=RTX'"></a>
-                </div>
-            </section>
-        </div>
+    <div class="top-bar">
+        <nav class="static-nav-links">
+            <a href="images/resume.pdf" target="_blank">Resume</a>
+            <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
+            <a href="mailto:thomaswatson1188@gmail.com">Email</a>
+        </nav>
         
-        <div class="main-content">
-            <header>
-                <img src="images/headshot.jpg" alt="Thomas Watson headshot" class="headshot" onerror="this.src='https://placehold.co/150x150?text=Thomas+W'">
-                <h1>Thomas Watson</h1>
-                <p class="lead">Bachelor of Mechanical Engineering, Minor in Computer Science · Dalhousie University</p>
-            </header>
+        <section class="scrolling-logos" aria-label="Featured Companies and Organizations">
+            <div class="logos-scroller">
+                <a href="#" title="Tesla"><img src="images/logo-tesla.png" alt="Tesla logo" onerror="this.src='https://placehold.co/140x35?text=Tesla'"></a>
+                <a href="#" title="Lockheed Martin"><img src="images/logo-lockheed.png" alt="Lockheed logo" onerror="this.src='https://placehold.co/140x35?text=Lockheed'"></a>
+                <a href="#" title="RTX"><img src="images/logo-rtx.png" alt="RTX logo" onerror="this.src='https://placehold.co/140x35?text=RTX'"></a>
+                <a href="#" title="Dalhousie"><img src="images/logo-dalhousie.png" alt="Dalhousie logo" onerror="this.src='https://placehold.co/140x35?text=Dalhousie'"></a>
+                <a href="#" title="DALIS"><img src="images/logo-dalis.png" alt="DALIS logo" onerror="this.src='https://placehold.co/140x35?text=DALIS'"></a>
+                <!-- Duplicates for loop -->
+                <a href="#" title="Tesla"><img src="images/logo-tesla.png" alt="Tesla logo" onerror="this.src='https://placehold.co/140x35?text=Tesla'"></a>
+                <a href="#" title="Lockheed Martin"><img src="images/logo-lockheed.png" alt="Lockheed logo" onerror="this.src='https://placehold.co/140x35?text=Lockheed'"></a>
+                <a href="#" title="RTX"><img src="images/logo-rtx.png" alt="RTX logo" onerror="this.src='https://placehold.co/140x35?text=RTX'"></a>
+                <a href="#" title="Dalhousie"><img src="images/logo-dalhousie.png" alt="Dalhousie logo" onerror="this.src='https://placehold.co/140x35?text=Dalhousie'"></a>
+                <a href="#" title="DALIS"><img src="images/logo-dalis.png" alt="DALIS logo" onerror="this.src='https://placehold.co/140x35?text=DALIS'"></a>
+                <a href="#" title="Tesla"><img src="images/logo-tesla.png" alt="Tesla logo" onerror="this.src='https://placehold.co/140x35?text=Tesla'"></a>
+                <a href="#" title="Lockheed Martin"><img src="images/logo-lockheed.png" alt="Lockheed logo" onerror="this.src='https://placehold.co/140x35?text=Lockheed'"></a>
+                <a href="#" title="RTX"><img src="images/logo-rtx.png" alt="RTX logo" onerror="this.src='https://placehold.co/140x35?text=RTX'"></a>
+            </div>
+        </section>
+    </div>
+    
+    <div class="main-content">
+        <header>
+            <img src="images/headshot.jpg" alt="Thomas Watson headshot" class="headshot" onerror="this.src='https://placehold.co/150x150?text=Thomas+W'">
+            <h1>Thomas Watson</h1>
+            <p class="lead">Bachelor of Mechanical Engineering, Minor in Computer Science · Dalhousie University</p>
+        </header>
 
-            <section class="about-me">
-                <p>
-                  Driven by a first-principles approach, I tackle complex engineering challenges at the intersection of hardware, software, and engineering program management. Currently honing my skills at Tesla, I specialize in mechanical design, simulation, and cross-functional engineering management to deliver robust, efficient solutions. Explore my website to see how I translate my ideas into impactful results.
-                </p>
-            </section>
+        <section class="about-me">
+            <p>
+              Driven by a first-principles approach, I tackle complex engineering challenges at the intersection of hardware, software, and engineering program management. Currently honing my skills at Tesla, I specialize in mechanical design, simulation, and cross-functional engineering management to deliver robust, efficient solutions. Explore my website to see how I translate my ideas into impactful results.
+            </p>
+        </section>
 
-            <section class="project-highlights">
-                <h2>Project Highlights</h2>
-                <div class="highlights-grid">
-                    <!-- MODIFIED LINKS FOR DEEP LINKING -->
-                    <a href="personal.html#robot-hand-project" class="highlight-item">
-                        <img src="images/cover_final.png" alt="AI Powered Robot Hand" onerror="this.src='https://placehold.co/300x200?text=Robot+Hand'">
-                         <div class="highlight-overlay"><span>From-Scratch AI Vision Robot Hand</span></div>
-                    </a>
-                    <a href="work.html" class="highlight-item">
-                        <img src="images/tesla-cybertruck-seats.png" alt="Tesla Cybertruck Seat Assembly Cell" onerror="this.src='https://placehold.co/300x200?text=Tesla+Seats'">
-                        <div class="highlight-overlay"><span>Cybertruck Robotic Cell Re-Design @ Tesla</span></div>
-                    </a>
-                    <a href="personal.html#controller-project" class="highlight-item">
-                        <img src="images/controller-project.png" alt="Custom Arduino/Matlab Controller" style="object-fit: contain; background-color: #fff;" onerror="this.src='https://placehold.co/300x200?text=Controller'">
-                         <div class="highlight-overlay"><span>Custom Arduino/MATLAB Video Game System</span></div>
-                    </a>
-                    <a href="work.html" class="highlight-item">
-                        <img src="images/lockheed-system-integration.png" alt="Lockheed Martin System Integration" onerror="this.src='https://placehold.co/300x200?text=Lockheed+System'">
-                         <div class="highlight-overlay"><span>Advanced System Integration Lead @ Lockheed Martin</span></div>
-                    </a>
-                </div>
-            </section>
-
-            <section class="categories">
-                <a href="work.html" class="category-card">
-                    <h2>Work Experience</h2>
-                    <p>Driving impact through internships at companies like Tesla, Lockheed Martin and Pratt & Whitney.</p>
-                    <span class="link-cta">View Projects &rarr;</span>
+        <section class="project-highlights">
+            <h2>Project Highlights</h2>
+            <div class="highlights-grid">
+                <!-- DEEP LINKING to separate files -->
+                <a href="personal.html#robot-hand-project" class="highlight-item">
+                    <img src="images/cover_final.png" alt="AI Powered Robot Hand" onerror="this.src='https://placehold.co/300x200?text=Robot+Hand'">
+                     <div class="highlight-overlay"><span>From-Scratch AI Vision Robot Hand</span></div>
                 </a>
-                <a href="personal.html" class="category-card">
-                    <h2>Personal Projects</h2>
-                    <p>Exploring my curiosity in hardware design, software development, or an intersection of the two.</p>
-                    <span class="link-cta">View Projects &rarr;</span>
+                <a href="work.html#tesla-cell" class="highlight-item">
+                    <img src="images/tesla-cybertruck-seats.png" alt="Tesla Cybertruck Seat Assembly Cell" onerror="this.src='https://placehold.co/300x200?text=Tesla+Seats'">
+                    <div class="highlight-overlay"><span>Cybertruck Robotic Cell Re-Design @ Tesla</span></div>
                 </a>
-                <a href="school.html" class="category-card">
-                    <h2>Academic Clubs/Projects</h2>
-                    <p>Applying fundamental mechanical and software engineering principles to complex challenges within design, CFD, FEA, Blockchain and Quantitative Finance.</p>
-                    <span class="link-cta">View Projects &rarr;</span>
+                <a href="personal.html#controller-project" class="highlight-item">
+                    <img src="images/controller-project.png" alt="Custom Arduino/Matlab Controller" style="object-fit: contain; background-color: #fff;" onerror="this.src='https://placehold.co/300x200?text=Controller'">
+                     <div class="highlight-overlay"><span>Custom Arduino/MATLAB Video Game System</span></div>
                 </a>
-            </section>
+                <a href="work.html#lm-integration" class="highlight-item">
+                    <img src="images/lockheed-system-integration.png" alt="Lockheed Martin System Integration" onerror="this.src='https://placehold.co/300x200?text=Lockheed+System'">
+                     <div class="highlight-overlay"><span>Advanced System Integration Lead @ Lockheed Martin</span></div>
+                </a>
+            </div>
+        </section>
 
-            <footer>
-                <p>© 2025 Thomas Watson</p>
-            </footer>
-        </div>
+        <section class="categories">
+            <a href="work.html" class="category-card">
+                <h2>Work Experience</h2>
+                <p>Driving impact through internships at companies like Tesla, Lockheed Martin and Pratt & Whitney.</p>
+                <span class="link-cta">View Projects &rarr;</span>
+            </a>
+            <a href="personal.html" class="category-card">
+                <h2>Personal Projects</h2>
+                <p>Exploring my curiosity in hardware design, software development, or an intersection of the two.</p>
+                <span class="link-cta">View Projects &rarr;</span>
+            </a>
+            <a href="school.html" class="category-card">
+                <h2>Academic Clubs/Projects</h2>
+                <p>Applying fundamental mechanical and software engineering principles to complex challenges within design, CFD, FEA, Blockchain and Quantitative Finance.</p>
+                <span class="link-cta">View Projects &rarr;</span>
+            </a>
+        </section>
+
+        <footer>
+            <p>© 2025 Thomas Watson</p>
+        </footer>
     </div>
 
-    <!-- =================================================================
-         VIEW: PERSONAL.HTML
-         ================================================================= -->
-    <div id="view-personal" class="view-section">
-        <div class="main-content" style="margin-top: 0;">
-            <header>
-                <h1>Personal Projects</h1>
-                <a href="index.html" class="back-link">&larr; Back to Home</a>
-            </header>
-            
-            <section class="projects">
-            
-                <!-- === NEW PROJECT: ROBOT HAND === -->
-                <article class="card" data-personal-id="robot-hand-project"> 
-                  <div class="slideshow-container">
-                    <div class="personal-slide active"><img src="images/cover_final.png" alt="Project Overview: CAD model, hand-tracking AI interface, and the finalized robotic hand" onerror="this.src='https://placehold.co/600x400?text=Robot+Hand+Overview'"></div>
-                    <div class="personal-slide"><img src="images/peace.png" alt="Real-time Demo: V1.1 hand successfully mimicking a 'peace' gesture via the Pi's AI interface" onerror="this.src='https://placehold.co/600x400?text=Peace+Sign+Demo'"></div>
-                    <div class="personal-slide"><img src="images/handfrontback.png" alt="Mechanical Detail: Front and back views showcasing the custom 10-DOF antagonistic tendon design" onerror="this.src='https://placehold.co/600x400?text=Mechanical+Detail'"></div>
-                    <div class="personal-slide"><img src="images/iterations.png" alt="Design Evolution: A timeline of 3D-printed prototypes from initial drafts to the current V1.1 model" onerror="this.src='https://placehold.co/600x400?text=Design+Evolution'"></div>
-                    <a class="prev" onclick="personalSlideChange('robot-hand-project', -1)">&#10094;</a>
-                    <a class="next" onclick="personalSlideChange('robot-hand-project', 1)">&#10095;</a>
-                  </div>
-                  <div class="caption-container">Project Overview: CAD model, hand-tracking AI interface, and the finalized robotic hand</div> 
-                  <h3>AI-Powered Robotic Hand</h3>
-                  <p class="meta">Skills: Computer Vision, Mechanical Design, SolidWorks, Python, Raspberry Pi</p>
-                  
-                  <!-- Toggle Button -->
-                  <div class="personal-toggle-bar" onclick="togglePersonalDescription(this)">
-                      <span>View Details</span>
-                      <i class="fas fa-chevron-down personal-toggle-icon"></i>
-                  </div>
-
-                  <!-- Collapsible Content -->
-                  <div class="personal-description-wrapper">
-                      <div style="padding-top: 15px;">
-                          <p>
-                            <strong>Challenge:</strong> To engineer a biomimetic, 10-Degree-of-Freedom (DOF) robotic hand from first principles, capable of high-fidelity, real-time motion mimicry controlled solely by a human hand and a camera.
-                          </p>
-                          <p>
-                            <strong>My Solution:</strong> I developed a complete, full-stack robotic system. The control architecture, running on a Raspberry Pi, uses MediaPipe for real-time 3D hand tracking. I invested significant effort into the control logic, engineering a custom ratio-based tuning algorithm to filter high-dimensional pose data into smooth, jitter-free servo commands. This allows for scale-invariant control, meaning the hand mimics gestures accurately regardless of my hand's distance from the camera.
-                          </p>
-                          
-                          <p>
-                            <strong>Mechanical Design (Version 2.0):</strong> My design process was highly iterative. I initially experimented with a "tendonless" printed-linkage design, but I found that the friction inherent in FDM 3D prints made the motion jerky and unreliable. I pivoted to an antagonistic tendon system using high-strength fishing line (flexion) and elastic cord (extension), which proved far more robust.
-                          </p>
-                          <p>
-                            I started by perfecting the geometry of a single finger. Through rapid prototyping and testing, I converged on a proximal/distal joint design that naturally sits at a slight resting angle, mimicking human anatomy. Once the mechanics were solid, I researched anthropometric data on human finger ratios (1 : 1.3 : 2.3) to scale this single finger design into a full hand. I adjusted the extruded lengths of each proximal phalanx to match real-life proportions and designed the palm layout based on measurements of my own hand to ensure natural spacing.
-                          </p>
-                          
-                          <!-- Dimensional Table -->
-                          <table class="data-table">
-                            <thead>
-                              <tr>
-                                <th>Finger</th>
-                                <th>Proximal Δ</th>
-                                <th>Middle Δ</th>
-                                <th>Distal Δ</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr><td>Thumb</td><td>−5.60 mm</td><td>N/A</td><td>−10.43 mm</td></tr>
-                              <tr><td>Index</td><td>−3.89 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
-                              <tr><td>Middle</td><td>0.00 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
-                              <tr><td>Ring</td><td>−2.97 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
-                              <tr><td>Little</td><td>−9.96 mm</td><td>−12.32 mm</td><td>−10.43 mm</td></tr>
-                            </tbody>
-                          </table>
-                    
-                          <p>
-                            <strong>Results (In Progress):</strong> The V1.1 prototype is fully functional. The computer vision pipeline, adaptive control logic, and live-streaming video feedback systems are complete and tuned. The mechanical assembly has successfully demonstrated real-time gesture mimicry, and I am currently engineering <strong>Version 3.0</strong> to integrate a 2-DOF thumb for opposition and a 2-DOF wrist for complex manipulation.
-                          </p>
-                      </div>
-                  </div>
-                </article>
-            
-                <!-- === CONTROLLER PROJECT === -->
-                <article class="card" data-personal-id="controller-project"> 
-                  <div class="slideshow-container">
-                    <div class="personal-slide active"><img src="images/controller-project.png" alt="CAD rendering of the initial controller design" onerror="this.src='https://placehold.co/600x400?text=CAD+Rendering'"></div>
-                    <div class="personal-slide"><img src="images/personal2.png" alt="3D printing of the original controller design" onerror="this.src='https://placehold.co/600x400?text=3D+Printing'"></div>
-                    <div class="personal-slide"><img src="images/personal3.png" alt="Original controller design with embedded electronics for testing" onerror="this.src='https://placehold.co/600x400?text=Electronics+Testing'"></div>
-                    <div class="personal-slide"><img src="images/personal4.png" alt="Final controller design with updated ergonomics and dual joysticks" onerror="this.src='https://placehold.co/600x400?text=Final+Design'"></div>
-                    <div class="personal-slide"><img src="images/personal5.png" alt="Finalized controller with all electronics integrated and wired" onerror="this.src='https://placehold.co/600x400?text=Wired+Integrated'"></div>
-                    <div class="personal-slide"><img src="images/personal6.png" alt="Screenshot of the custom video game during real-time gameplay" onerror="this.src='https://placehold.co/600x400?text=In-Game+Screenshot'"></div>
-                    <a class="prev" onclick="personalSlideChange('controller-project', -1)">&#10094;</a>
-                    <a class="next" onclick="personalSlideChange('controller-project', 1)">&#10095;</a>
-                  </div>
-                  <div class="caption-container">CAD rendering of the initial controller design</div> 
-                  <h3>Arduino-Matlab Video Game System</h3>
-                  <p class="meta">Skills: Mechanical Design, 3D Printing, MATLAB, Arduino, ODEs</p>
-                  
-                  <!-- Toggle Button -->
-                  <div class="personal-toggle-bar" onclick="togglePersonalDescription(this)">
-                      <span>View Details</span>
-                      <i class="fas fa-chevron-down personal-toggle-icon"></i>
-                  </div>
-
-                  <!-- Collapsible Content -->
-                  <div class="personal-description-wrapper">
-                      <div style="padding-top: 15px;">
-                          <p>
-                            <strong>Challenge:</strong> To design, manufacture, and program a complete 2D video game system from first principles. The goal was to create a custom-built, ergonomic controller and develop a game where the physics were not pre-canned, but governed by real-time mathematical models.
-                          </p>
-                          <p>
-                            <strong>My Solution:</strong> I engineered a full-stack solution, starting with a 3D-printed, ergonomic controller designed in SolidWorks for an improved user experience over standard models. For the electronics, I used an Arduino to process analog and digital inputs from the joysticks. The core of the project is the software, written in MATLAB, which features a custom "handshaking" protocol to receive data from the Arduino. All in-game movement is governed by a Runge-Kutta (RK4) differential equation modeler I implemented to simulate Newtonian physics, creating a realistic mass-and-damper feel.
-                          </p>
-                          <p>
-                            <strong>Results:</strong> The final product is a fully functional gaming system with a custom controller and a physics-driven game. This project demonstrates my ability to manage an end-to-end design lifecycle, combining ergonomic mechanical design, hardware integration (Arduino), and complex software development (MATLAB) with advanced mathematical modeling.
-                          </p>
-                    
-                          <div class="links">
-                            <a href="images/project-videogame-system.pdf" target="_blank">View Full Project PDF</a>
-                          </div>
-                      </div>
-                  </div>
-                </article>
-                
-            </section>
-            
-            <footer>
-                <p>
-                  <a href="images/resume.pdf" target="_blank"> Download Resume</a> ·
-                  <a href="mailto:thomaswatson1188@gmail.com">Email Me</a> ·
-                  <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
-                </p>
-                <p>© 2025 Thomas Watson</p>
-            </footer>
-        </div>
-    </div>
-
-    <!-- =================================================================
-         VIEW: SCHOOL.HTML
-         ================================================================= -->
-    <div id="view-school" class="view-section">
-        <div class="main-content" style="margin-top: 0;">
-            <header>
-                <h1>Academic Clubs & Projects</h1>
-                <a href="index.html" class="back-link">&larr; Back to Home</a>
-            </header>
-            
-            <section class="projects">
-            
-                <article class="card">
-                  <img src="images/dalis-quant-app.png" alt="Quantitative risk management application" class="static-img" onerror="this.src='https://placehold.co/600x400?text=Quant+App'">
-                  
-                  <h3>Quantitative Risk Management App</h3>
-                  <p class="meta">Role: Quantitative Analyst @ Dalhousie Investment Society (DALIS)</p>
-                  
-                  <p>
-                    <strong>Challenge:</strong> The Dalhousie Investment Society had no viable way to track their Profit and Loss (PNL), preventing accurate performance measurement and risk management.
-                  </p>
-                  <p>
-                    <strong>My Solution:</strong> I built a quantitative analysis application in Python. The app leverages the Bloomberg API to pull raw trade data and uses Pandas/NumPy to calculate daily PNL. I integrated Monte Carlo simulations and stock correlation matrices, visualized with Matplotlib.
-                  </p>
-                  <p>
-                    <strong>Results:</strong> The application became the central tool for performance tracking, elevating the society's analytical capabilities and enabling sophisticated risk management.
-                  </p>
-            
-                  <div class="links">
-                    <a href="https://www.youtube.com/watch?v=uR4WB4MBuhw" target="_blank">View App Tutorial Video</a>
-                  </div>
-                </article>
-            
-                <article class="card">
-                  <img src="images/chip-cooler-design.png" alt="CAD rendering of heat sink" class="static-img" onerror="this.src='https://placehold.co/600x400?text=Chip+Cooler'">
-                  
-                  <h3>High-Efficiency Liquid Chip Cooling Design</h3>
-                  <p class="meta">Course: Advanced Heat Transfer @ Dalhousie University</p>
-                  
-                  <p>
-                    <strong>Challenge:</strong> A multi-chip module generating over 200W of heat required a high-performance liquid cooling solution to prevent thermal throttling.
-                  </p>
-                  <p>
-                    <strong>My Solution:</strong> I designed and simulated a custom liquid cold plate using CFD/thermal analysis software. The design features a copper manifold and a microchannel heat sink with 26 optimized fins to maximize convective heat transfer.
-                  </p>
-                  <p>
-                    <strong>Results:</strong> The simulated design dissipated over 707W of heat (a <b>353.9% improvement</b> over the goal) while keeping chip temperatures below 85°C.
-                  </p>
-                </article>
-                
-            </section>
-            
-            <footer>
-                <p>
-                  <a href="images/resume.pdf" target="_blank"> Download Resume</a> ·
-                  <a href="mailto:thomaswatson1188@gmail.com">Email Me</a> ·
-                  <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
-                </p>
-                <p>© 2025 Thomas Watson</p>
-            </footer>
-        </div>
-    </div>
-
-    <!-- =================================================================
-         VIEW: WORK.HTML
-         ================================================================= -->
-    <div id="view-work" class="view-section">
-        <div class="main-content" style="margin-top: 0;">
-            <header>
-                <h1>Work Projects</h1>
-                <a href="index.html" class="back-link">&larr; Back to Home</a>
-            </header>
-        
-            <ul class="project-list">
-                <!-- TESLA CELL -->
-                <li class="project-item" data-project-id="tesla-cell">
-                    <div class="project-preview">
-                         <div class="preview-image-container">
-                             <img src="images/tesla-cybertruck-seats.png" alt="2025 Cybertruck Seats" class="active" onerror="this.src='https://placehold.co/100x100?text=Seats'">
-                             <img src="images/robot_cell.png" alt="Fanuc robotic cell" onerror="this.src='https://placehold.co/100x100?text=Robot'">
-                         </div>
-                         <div class="preview-text">
-                             <h3>Cybertruck Robotic Cell Re-Design</h3>
-                             <p class="meta">Role: Equipment Design Engineering Intern @ Tesla</p>
-                              <img src="images/logo-tesla.png" alt="" class="preview-company-logo" onerror="this.style.display='none'">
-                         </div>
-                         <span class="preview-icon">›</span>
-                    </div>
-                    <div class="project-details">
-                        <div class="slideshow-container">
-                            <div class="work-slide active"><img src="images/tesla-cybertruck-seats.png" alt="2025 Cybertruck Seats" onerror="this.src='https://placehold.co/800x400?text=Cybertruck+Seats'"></div>
-                            <div class="work-slide"><img src="images/robot_cell.png" alt="Example of a Fanuc robotic manufacturing cell" onerror="this.src='https://placehold.co/800x400?text=Robot+Cell'"></div>
-                            <a class="prev" onclick="workSlideChange('tesla-cell', -1)">&#10094;</a>
-                            <a class="next" onclick="workSlideChange('tesla-cell', 1)">&#10095;</a>
-                        </div>
-                        <div class="caption-container">2025 Cybertruck Seats</div>
-                        <div class="project-description">
-                            <p><strong>Problem:</strong> A key robotic cell on the Cybertruck production line was improperly disposing of rejected seat structures, dropping them on the floor. This resulted in hundreds of thousands of dollars in annual material scrap and created a safety hazard.</p>
-                            <p><strong>My Solution:</strong> I designed a custom, non-intrusive rejection chute from the ground up using Solidworks and Siemens NX. I then single-handedly reprogrammed the entire Fanuc robotic logic to flawlessly deposit rejected parts into the new assembly.</p>
-                            <p><strong>Results:</strong> The solution completely eliminated the scrap issue and associated downtime, delivering an annual savings of <b>over $175,000</b> while improving cell safety.</p>
-                        </div>
-                    </div>
-                </li>
-        
-                <!-- LOCKHEED INTEGRATION -->
-                <li class="project-item" data-project-id="lm-integration">
-                    <div class="project-preview">
-                         <div class="preview-image-container">
-                             <img src="images/lockheed-system-integration.png" alt="CSC Ship Rendering" class="active" onerror="this.src='https://placehold.co/100x100?text=Ship'">
-                             <img src="images/laser_photo.png" alt="Laser System" onerror="this.src='https://placehold.co/100x100?text=Laser'">
-                             <img src="images/laser_3.png" alt="System Integration" onerror="this.src='https://placehold.co/100x100?text=Integration'">
-                          </div>
-                        <div class="preview-text">
-                            <h3>Advanced Classified System Design TPM</h3>
-                            <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
-                            <img src="images/logo-lockheed.png" alt="" class="preview-company-logo" onerror="this.style.display='none'">
-                        </div>
-                        <span class="preview-icon">›</span>
-                    </div>
-                    <div class="project-details">
-                         <div class="slideshow-container">
-                             <div class="work-slide active"><img src="images/lockheed-system-integration.png" alt="CSC Ship Rendering by Mechanical Design Team" onerror="this.src='https://placehold.co/800x400?text=Ship+Rendering'"></div>
-                             <div class="work-slide"><img src="images/laser_photo.png" alt="Unclassified Example: Similar Laser Warning System" onerror="this.src='https://placehold.co/800x400?text=Laser+System'"></div>
-                             <div class="work-slide"><img src="images/laser_3.png" alt="Unclassified Example: Similar System Integration" onerror="this.src='https://placehold.co/800x400?text=Integration+Example'"></div>
-                             <a class="prev" onclick="workSlideChange('lm-integration', -1)">&#10094;</a>
-                             <a class="next" onclick="workSlideChange('lm-integration', 1)">&#10095;</a>
-                         </div>
-                         <div class="caption-container">CSC Ship Rendering by Mechanical Design Team</div>
-                         <div class="project-description">
-                             <p><strong>Problem:</strong> Integration of a proprietary, mission-critical system on the CSC faced conflicting constraints from external vendors and internal design teams. The challenge was to find a viable path that did not compromise system performance or classified integrity.</p>
-                             <p><strong>My Solution:</strong> I served as the single point of contact between 4 key vendors and internal teams. Using SolidWorks, I modeled design changes to resolve complex physical, thermal, and RF constraints, and led the hull redesign effort.</p>
-                             <p><strong>Results:</strong> I successfully aligned all stakeholders on a final, approved integration path, clearing a major bottleneck and ensuring the project remained on schedule.</p>
-                         </div>
-                    </div>
-                </li>
-        
-                 <!-- LOCKHEED TOPSIDE -->
-                 <li class="project-item" data-project-id="lm-topside">
-                    <div class="project-preview">
-                         <div class="preview-image-container">
-                              <img src="images/lockheed-topside-design.png" alt="Topside Layout" class="active" onerror="this.src='https://placehold.co/100x100?text=Layout'">
-                              <img src="images/LOS.png" alt="LOS Tool" onerror="this.src='https://placehold.co/100x100?text=LOS'">
-                              <img src="images/rf_pattern.png" alt="RF Pattern" onerror="this.src='https://placehold.co/100x100?text=RF'">
-                         </div>
-                        <div class="preview-text">
-                             <h3>CSC Topside Mechanical Design & Integration</h3>
-                            <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
-                            <img src="images/logo-lockheed.png" alt="" class="preview-company-logo" onerror="this.style.display='none'">
-                        </div>
-                         <span class="preview-icon">›</span>
-                    </div>
-                    <div class="project-details">
-                        <div class="slideshow-container">
-                            <div class="work-slide active"><img src="images/lockheed-topside-design.png" alt="CAD rendering of naval ship topside equipment layout" onerror="this.src='https://placehold.co/800x400?text=Topside+Design'"></div>
-                            <div class="work-slide"><img src="images/LOS.png" alt="SolidWorks Line-of-Sight (LOS) dome analysis tool" onerror="this.src='https://placehold.co/800x400?text=LOS+Analysis'"></div>
-                             <div class="work-slide"><img src="images/rf_pattern.png" alt="Example RF antenna pattern analysis consideration" onerror="this.src='https://placehold.co/800x400?text=RF+Pattern'"></div>
-                            <a class="prev" onclick="workSlideChange('lm-topside', -1)">&#10094;</a>
-                            <a class="next" onclick="workSlideChange('lm-topside', 1)">&#10095;</a>
-                        </div>
-                        <div class="caption-container">CAD rendering of naval ship topside equipment layout</div>
-                        <div class="project-description">
-                            <p><strong>Problem:</strong> Relocating critical topside equipment required complex mechanical integration to satisfy competing constraints from RF performance, thermal loads, and structural integrity.</p>
-                            <p><strong>My Solution:</strong> I led the mechanical design effort for several key placements, creating detailed feasibility studies in SolidWorks and utilizing Line-of-Sight analysis. I collaborated with internal RF, Thermal, and Aero teams to propose solutions.</p>
-                            <p><strong>Results:</strong> My work resulted in the successful approval and implementation path for <b>9 critical equipment placements</b> within 4 months.</p>
-                        </div>
-                         <div class="details-links">
-                             <a href="images/Mech_Design_Lockheed_TW.pdf" target="_blank">View Project Context PDF</a>
-                         </div>
-                    </div>
-                </li>
-        
-                <!-- LOCKHEED CFD -->
-                <li class="project-item" data-project-id="lm-cfd">
-                    <div class="project-preview">
-                         <div class="preview-image-container">
-                              <img src="images/lockheed-cfd.png" alt="CFD Thermal" class="active" onerror="this.src='https://placehold.co/100x100?text=CFD'">
-                              <img src="images/cfd_calc.png" alt="Calc Method" onerror="this.src='https://placehold.co/100x100?text=Calc'">
-                              <img src="images/cfd_ship.png" alt="Aerodynamic Sim" onerror="this.src='https://placehold.co/100x100?text=Sim'">
-                         </div>
-                         <div class="preview-text">
-                            <h3>Helicopter Landing Thermal Analysis (CFD)</h3>
-                            <p class="meta">Role: Aerodynamics/RF Engineering Intern @ Lockheed Martin</p>
-                            <img src="images/logo-lockheed.png" alt="" class="preview-company-logo" onerror="this.style.display='none'">
-                         </div>
-                        <span class="preview-icon">›</span>
-                    </div>
-                    <div class="project-details">
-                        <div class="slideshow-container">
-                            <div class="work-slide active"><img src="images/lockheed-cfd.png" alt="CFD thermal analysis of helicopter landing deck" onerror="this.src='https://placehold.co/800x400?text=CFD+Analysis'"></div>
-                            <div class="work-slide"><img src="images/cfd_calc.png" alt="Thermodynamic calculation method for mass flow rate" onerror="this.src='https://placehold.co/800x400?text=Calculations'"></div>
-                            <div class="work-slide"><img src="images/cfd_ship.png" alt="Unclassified example of aerodynamic headwind simulation" onerror="this.src='https://placehold.co/800x400?text=Headwind+Sim'"></div>
-                            <a class="prev" onclick="workSlideChange('lm-cfd', -1)">&#10094;</a>
-                            <a class="next" onclick="workSlideChange('lm-cfd', 1)">&#10095;</a>
-                        </div>
-                        <div class="caption-container">CFD thermal analysis of helicopter landing deck</div>
-                        <div class="project-description">
-                             <p><strong>Problem:</strong> The program needed to validate safe helicopter landing conditions, but it was unknown how hot turbine exhaust would affect the flight deck under various conditions.</p>
-                             <p><strong>My Solution:</strong> I developed the foundational thermodynamic model, calculated exhaust flow rates, and analyzed over 20 ship model iterations in ANSYS Fluent.</p>
-                             <p><strong>Results:</strong> I consolidated complex data into a concise 'logic board' that enabled vendors to validate safe helicopter landing envelopes.</p>
-                        </div>
-                         <div class="details-links">
-                             <a href="images/lockheed_project.pdf" target="_blank">View Project Context PDF</a>
-                         </div>
-                    </div>
-                </li>
-        
-                 <!-- LOCKHEED LOS -->
-                 <li class="project-item" data-project-id="lm-los">
-                     <div class="project-preview">
-                          <div class="preview-image-container">
-                             <img src="images/lockheed-los-analysis.png" alt="LOS Analysis" class="active" onerror="this.src='https://placehold.co/100x100?text=LOS'">
-                               <img src="images/los_discrepancy.png" alt="Discrepancy" onerror="this.src='https://placehold.co/100x100?text=Error'">
-                          </div>
-                          <div class="preview-text">
-                              <h3>Company-Wide Line-of-Sight (LOS) Process Overhaul</h3>
-                               <p class="meta">Role: Mechanical Design TPM Intern @ Lockheed Martin</p>
-                               <img src="images/logo-lockheed.png" alt="" class="preview-company-logo" onerror="this.style.display='none'">
-                          </div>
-                           <span class="preview-icon">›</span>
-                        </div>
-                        <div class="project-details">
-                          <div class="slideshow-container">
-                              <div class="work-slide active"><img src="images/lockheed-los-analysis.png" alt="Line-of-sight analysis diagram for naval ship" onerror="this.src='https://placehold.co/800x400?text=LOS+Analysis'"></div>
-                               <div class="work-slide"><img src="images/los_discrepancy.png" alt="Diagram showing LOS analysis discrepancy" onerror="this.src='https://placehold.co/800x400?text=Discrepancy'"></div>
-                               <a class="prev" onclick="workSlideChange('lm-los', -1)">&#10094;</a>
-                               <a class="next" onclick="workSlideChange('lm-los', 1)">&#10095;</a>
-                          </div>
-                          <div class="caption-container">Line-of-sight analysis diagram for naval ship</div>
-                          <div class="project-description">
-                               <p><strong>Problem:</strong> The existing procedure for conducting line-of-sight analysis contained significant discrepancies, leading to inaccurate results.</p>
-                               <p><strong>My Solution:</strong> I led the complete redevelopment of a new, more accurate LOS analysis procedure using SolidWorks and trained engineers on its implementation.</p>
-                               <p><strong>Results:</strong> The new procedure improved accuracy by <b>over 8%</b> and is now the standard method used for the program.</p>
-                          </div>
-                     </div>
-                 </li>
-        
-                <!-- RTX AUTO -->
-                <li class="project-item" data-project-id="rtx-auto">
-                     <div class="project-preview">
-                          <div class="preview-image-container">
-                               <img src="images/powerbi.png" alt="Power BI" class="active" onerror="this.src='https://placehold.co/100x100?text=Power+BI'">
-                               <img src="images/rtx-automation.png" alt="Automation Flow" onerror="this.src='https://placehold.co/100x100?text=Flowchart'">
-                          </div>
-                          <div class="preview-text">
-                             <h3>PW800 Manufacturing Automation Dashboard</h3>
-                             <p class="meta">Role: Aerospace Engineering and Logistics Intern @ RTX</p>
-                               <img src="images/logo-rtx.png" alt="" class="preview-company-logo" onerror="this.style.display='none'">
-                          </div>
-                           <span class="preview-icon">›</span>
-                        </div>
-                     <div class="project-details">
-                          <div class="slideshow-container">
-                               <div class="work-slide active"><img src="images/powerbi.png" alt="Data flow: Python to VBA to Power BI" onerror="this.src='https://placehold.co/800x400?text=Data+Flow'"></div>
-                               <div class="work-slide"><img src="images/rtx-automation.png" alt="Process automation flowchart for SAP data extraction" onerror="this.src='https://placehold.co/800x400?text=Automation'"></div>
-                               <a class="prev" onclick="workSlideChange('rtx-auto', -1)">&#10094;</a>
-                               <a class="next" onclick="workSlideChange('rtx-auto', 1)">&#10095;</a>
-                          </div>
-                          <div class="caption-container">Data flow: Python to VBA to Power BI</div>
-                          <div class="project-description">
-                              <p><strong>Problem:</strong> Strategic decisions were hindered by outdated scripts, forcing a slow, manual data-pulling process that took 8 hours every week.</p>
-                              <p><strong>My Solution:</strong> I re-engineered the process by translating scripts into robust VBA macros connected to a Power BI frontend.</p>
-                              <p><strong>Results:</strong> The new system eliminated manual data refresh, providing live metrics to 5 cross-functional teams.</p>
-                          </div>
-                     </div>
-                </li>
-            </ul>
-        
-            <footer>
-                <p>
-                    <a href="images/resume.pdf" target="_blank"> Download Resume</a> ·
-                    <a href="mailto:thomaswatson1188@gmail.com">Email Me</a> ·
-                    <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
-                </p>
-                <p>© 2025 Thomas Watson</p>
-            </footer>
-        </div>
-    </div>
-
-    <!-- =================================================================
-         SCRIPTS
-         ================================================================= -->
-    <script>
-        // --- NAVIGATION LOGIC (Single Page App behavior) ---
-        function showView(viewId) {
-            // Hide all views
-            document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
-            // Show target
-            const target = document.getElementById(viewId);
-            if(target) target.classList.add('active');
-            window.scrollTo(0,0);
-        }
-
-        // Intercept link clicks
-        document.addEventListener('click', function(e) {
-            const link = e.target.closest('a');
-            if (link) {
-                const href = link.getAttribute('href');
-                if (!href) return;
-
-                // Handle Personal Page with potential Hash
-                if (href.startsWith('personal.html')) {
-                    e.preventDefault();
-                    showView('view-personal');
-                    
-                    // Check for hash in the href (e.g. "personal.html#robot-hand-project")
-                    if (href.includes('#')) {
-                        const hash = href.split('#')[1];
-                        const targetCard = document.querySelector(`.card[data-personal-id="${hash}"]`);
-                        if (targetCard) {
-                            if (!targetCard.classList.contains('expanded')) {
-                                const toggleBtn = targetCard.querySelector('.personal-toggle-bar');
-                                if (toggleBtn) togglePersonalDescription(toggleBtn);
-                            }
-                            setTimeout(() => {
-                                targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            }, 100);
-                        }
-                    }
-                } 
-                // Handle other links
-                else if (href === 'index.html') {
-                    e.preventDefault();
-                    showView('view-index');
-                } else if (href === 'work.html') {
-                    e.preventDefault();
-                    showView('view-work');
-                } else if (href === 'school.html') {
-                    e.preventDefault();
-                    showView('view-school');
-                }
-            }
-        });
-
-        // =================================================================
-        // PERSONAL PAGE TOGGLE LOGIC
-        // =================================================================
-        function togglePersonalDescription(element) {
-            const card = element.closest('.card');
-            card.classList.toggle('expanded');
-            
-            // Toggle text
-            const textSpan = element.querySelector('span');
-            if (card.classList.contains('expanded')) {
-                textSpan.textContent = 'Hide Details';
-            } else {
-                textSpan.textContent = 'View Details';
-            }
-        }
-
-        // =================================================================
-        // PERSONAL PAGE SLIDESHOW LOGIC
-        // =================================================================
-        const personalSlideshowData = {};
-
-        function initPersonalSlideshow(projectId) {
-            if (!personalSlideshowData[projectId]) {
-                const projectItem = document.querySelector(`.card[data-personal-id="${projectId}"]`);
-                if (!projectItem) return;
-                const slides = projectItem.querySelectorAll('.personal-slide');
-                const captions = Array.from(slides).map(slide => slide.querySelector('img').alt || '');
-                personalSlideshowData[projectId] = {
-                    slideIndex: 0, 
-                    slides: slides, 
-                    captions: captions, 
-                    timer: null,
-                    captionElement: projectItem.querySelector('.caption-container')
-                };
-            }
-        }
-
-        function showPersonalSlide(projectId, index) {
-            initPersonalSlideshow(projectId);
-            const data = personalSlideshowData[projectId];
-            if (!data || !data.slides || data.slides.length === 0) return;
-            
-            if (index >= data.slides.length) { index = 0; }
-            if (index < 0) { index = data.slides.length - 1; }
-            
-            data.slides.forEach(slide => slide.classList.remove('active'));
-            data.slides[index].classList.add('active');
-            data.slideIndex = index;
-            
-            if (data.captionElement) {
-                data.captionElement.style.opacity = 0;
-                setTimeout(() => {
-                    data.captionElement.textContent = data.captions[index] || '';
-                    data.captionElement.style.opacity = 1;
-                }, 150);
-            }
-        }
-
-        function personalSlideChange(projectId, n) {
-            initPersonalSlideshow(projectId);
-            const data = personalSlideshowData[projectId];
-            if (!data) return;
-            stopPersonalAutoSlide(projectId); 
-            showPersonalSlide(projectId, data.slideIndex + n);
-            setTimeout(() => startPersonalAutoSlide(projectId), 8000); 
-        }
-
-        function startPersonalAutoSlide(projectId) {
-            initPersonalSlideshow(projectId);
-            const data = personalSlideshowData[projectId];
-            if (!data || data.slides.length <= 1) return;
-            stopPersonalAutoSlide(projectId); 
-            data.timer = setInterval(() => {
-                showPersonalSlide(projectId, data.slideIndex + 1);
-            }, 5000);
-        }
-
-        function stopPersonalAutoSlide(projectId) {
-            if (personalSlideshowData[projectId] && personalSlideshowData[projectId].timer) {
-                clearInterval(personalSlideshowData[projectId].timer);
-                personalSlideshowData[projectId].timer = null;
-            }
-        }
-
-        // Initialize Personal Slideshows
-        document.querySelectorAll('.card[data-personal-id]').forEach(card => {
-            const id = card.dataset.personalId;
-            initPersonalSlideshow(id);
-            showPersonalSlide(id, 0);
-            startPersonalAutoSlide(id);
-        });
-
-
-        // =================================================================
-        // WORK PAGE LOGIC (Accordion + Slideshows)
-        // =================================================================
-        const workProjectItems = Array.from(document.querySelectorAll('.project-item'));
-        const workSlideshowData = {};
-        const previewSlideshowData = {};
-
-        // Utilities
-        function waitForImageLoad(img, timeout = 4000) {
-            return new Promise(resolve => {
-                if (!img) return resolve();
-                if (img.complete && img.naturalWidth) return resolve();
-                const onDone = () => {
-                    img.removeEventListener('load', onDone);
-                    img.removeEventListener('error', onDone);
-                    resolve();
-                };
-                img.addEventListener('load', onDone);
-                img.addEventListener('error', onDone);
-                setTimeout(() => {
-                    img.removeEventListener('load', onDone);
-                    img.removeEventListener('error', onDone);
-                    resolve();
-                }, timeout);
-            });
-        }
-
-        function computeHeightForImage(container, img) {
-            if (!container || !img) return 300;
-            const naturalW = img.naturalWidth || img.width || 1;
-            const naturalH = img.naturalHeight || img.height || 1;
-            const width = container.clientWidth || container.offsetWidth || 600;
-            if (naturalW && naturalH) {
-                return Math.max(120, Math.round(width * naturalH / naturalW));
-            }
-            return Math.max(120, Math.round(width * 0.6));
-        }
-
-        const resizeObservers = new Map();
-        function attachResizeObserver(container, activeImg, projectId) {
-            if (!container) return;
-            if (resizeObservers.has(container)) return;
-            const ro = new ResizeObserver(() => {
-                const data = workSlideshowData[projectId];
-                if (!data) return;
-                const active = container.querySelector('.work-slide.active img') || activeImg;
-                if (!active) return;
-                const h = computeHeightForImage(container, active);
-                container.style.height = h + 'px';
-            });
-            ro.observe(container);
-            resizeObservers.set(container, ro);
-        }
-        function detachResizeObserver(container) {
-            const ro = resizeObservers.get(container);
-            if (ro) {
-                try { ro.disconnect(); } catch(e){}
-                resizeObservers.delete(container);
-            }
-        }
-
-        function initWorkSlideshow(projectId) {
-            if (!workSlideshowData[projectId]) {
-                const projectItem = document.querySelector(`.project-item[data-project-id="${projectId}"]`);
-                const slides = Array.from(projectItem.querySelectorAll('.project-details .work-slide'));
-                const captions = slides.map(slide => {
-                    const img = slide.querySelector('img');
-                    return img ? (img.alt || '') : '';
-                });
-                workSlideshowData[projectId] = {
-                    slideIndex: 0,
-                    slides: slides,
-                    captions: captions,
-                    timer: null,
-                    captionElement: projectItem.querySelector('.project-details .caption-container'),
-                    containerElement: projectItem.querySelector('.slideshow-container'),
-                    projectItem: projectItem
-                };
-            }
-        }
-        function initPreviewSlideshow(projectId) {
-            if (!previewSlideshowData[projectId]) {
-                const projectItem = document.querySelector(`.project-item[data-project-id="${projectId}"]`);
-                const previewContainer = projectItem.querySelector('.preview-image-container');
-                const previewImages = Array.from(previewContainer.querySelectorAll('img'));
-                previewSlideshowData[projectId] = {
-                    previewIndex: 0, previewImages: previewImages, previewTimer: null
-                };
-            }
-        }
-
-        function showPreviewImage(projectId, index) {
-             initPreviewSlideshow(projectId);
-             const data = previewSlideshowData[projectId];
-             if (!data || !data.previewImages || data.previewImages.length === 0) return;
-             if (index >= data.previewImages.length) { index = 0; }
-             if (index < 0) { index = data.previewImages.length - 1; }
-             data.previewImages.forEach(img => img.classList.remove('active'));
-             data.previewImages[index].classList.add('active');
-             data.previewIndex = index;
-        }
-        function startPreviewAutoSlide(projectId) {
-             initPreviewSlideshow(projectId);
-             const data = previewSlideshowData[projectId];
-             if (!data || data.previewImages.length <= 1) return;
-             stopPreviewAutoSlide(projectId);
-             showPreviewImage(projectId, 0); 
-             data.previewTimer = setInterval(() => { showPreviewImage(projectId, data.previewIndex + 1); }, 3000);
-        }
-        function stopPreviewAutoSlide(projectId) {
-             if (previewSlideshowData[projectId] && previewSlideshowData[projectId].previewTimer) {
-                 clearInterval(previewSlideshowData[projectId].previewTimer);
-                 previewSlideshowData[projectId].previewTimer = null;
-             }
-        }
-
-        function showWorkSlide(projectId, index) {
-            initWorkSlideshow(projectId);
-            const data = workSlideshowData[projectId];
-            if (!data || !data.slides || data.slides.length === 0) return;
-            if (index >= data.slides.length) index = 0;
-            if (index < 0) index = data.slides.length - 1;
-
-            if (data.slideIndex === index && data.slides[index].classList.contains('active')) {
-                // just update caption
-                if (data.captionElement) {
-                     data.captionElement.textContent = data.captions[index] || '';
-                }
-                return Promise.resolve();
-            }
-
-            const targetSlide = data.slides[index];
-            const targetImg = targetSlide.querySelector('img');
-
-            stopPreviewAutoSlide(projectId);
-
-            return waitForImageLoad(targetImg, 4000).then(() => {
-                const container = data.containerElement;
-                const targetHeight = computeHeightForImage(container, targetImg);
-                container.style.height = targetHeight + 'px';
-                
-                // Force reflow
-                container.getBoundingClientRect();
-
-                data.slides.forEach(s => s.classList.remove('active'));
-                
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        targetSlide.classList.add('active');
-                        data.slideIndex = index;
-                        if (data.captionElement) {
-                            data.captionElement.style.opacity = 0;
-                            setTimeout(() => {
-                                data.captionElement.textContent = data.captions[index] || '';
-                                data.captionElement.style.opacity = 1;
-                            }, 150);
-                        }
-                    });
-                });
-
-                attachResizeObserver(container, targetImg, projectId);
-                return Promise.resolve();
-            });
-        }
-
-        function workSlideChange(projectId, n) {
-             initWorkSlideshow(projectId);
-             const data = workSlideshowData[projectId];
-             stopWorkAutoSlide(projectId); 
-             Promise.resolve(showWorkSlide(projectId, data.slideIndex + n)).then(() => {
-                 setTimeout(() => startWorkAutoSlide(projectId), 8000);
-             });
-         }
-        function startWorkAutoSlide(projectId) {
-            initWorkSlideshow(projectId);
-            const data = workSlideshowData[projectId];
-            if (!data || data.slides.length <= 1) return;
-            stopWorkAutoSlide(projectId);
-            data.timer = setInterval(() => {
-                 showWorkSlide(projectId, data.slideIndex + 1);
-            }, 5000);
-        }
-        function stopWorkAutoSlide(projectId) {
-            if (workSlideshowData[projectId] && workSlideshowData[projectId].timer) {
-                 clearInterval(workSlideshowData[projectId].timer);
-                 workSlideshowData[projectId].timer = null;
-            }
-        }
-
-        function animateHeightTo(container, fromPx, toPx, timeout = 650) {
-            return new Promise(resolve => {
-                if (!container) return resolve();
-                let done = false;
-                const onEnd = (e) => {
-                    if (e && e.target !== container) return;
-                    if (done) return;
-                    done = true;
-                    container.removeEventListener('transitionend', onEnd);
-                    resolve();
-                };
-                container.addEventListener('transitionend', onEnd);
-                container.style.height = fromPx + 'px';
-                container.getBoundingClientRect();
-                requestAnimationFrame(() => {
-                    container.style.height = toPx + 'px';
-                });
-                setTimeout(() => { if (!done) { done = true; container.removeEventListener('transitionend', onEnd); resolve(); } }, timeout + 100);
-            });
-        }
-
-        // Accordion Handlers
-        workProjectItems.forEach(item => {
-            const summary = item.querySelector('.project-preview');
-            const projectId = item.getAttribute('data-project-id');
-            startPreviewAutoSlide(projectId);
-
-            summary.addEventListener('click', async () => {
-                const wasActive = item.classList.contains('active');
-                const list = item.closest('.project-list');
-
-                // Close others
-                for (const otherItem of workProjectItems) {
-                    if (otherItem !== item && otherItem.classList.contains('active')) {
-                        const otherId = otherItem.getAttribute('data-project-id');
-                        otherItem.classList.remove('active');
-                        const otherData = workSlideshowData[otherId];
-                        if (otherData) stopWorkAutoSlide(otherId);
-                        
-                        const otherContainer = otherItem.querySelector('.slideshow-container');
-                        if (otherContainer) {
-                            otherItem.classList.add('closing');
-                            const curH = otherContainer.getBoundingClientRect().height || otherContainer.clientHeight || 0;
-                            await animateHeightTo(otherContainer, curH, 0);
-                            otherContainer.style.height = '';
-                            otherItem.classList.remove('closing');
-                            detachResizeObserver(otherContainer);
-                        }
-                        startPreviewAutoSlide(otherId);
-                    }
-                }
-
-                if (!wasActive) { // Opening
-                    item.classList.add('active');
-                    list.classList.add('item-active');
-                    initWorkSlideshow(projectId);
-                    stopPreviewAutoSlide(projectId);
-
-                    const data = workSlideshowData[projectId];
-                    const container = data.containerElement;
-                    const initialSlide = container.querySelector('.work-slide') || data.slides[0];
-                    const initialImg = initialSlide ? initialSlide.querySelector('img') : null;
-                    if (initialImg) await waitForImageLoad(initialImg, 4000);
-                    
-                    const targetH = computeHeightForImage(container, initialImg || container.querySelector('img'));
-                    await animateHeightTo(container, 0, targetH);
-                    await showWorkSlide(projectId, 0);
-                    startWorkAutoSlide(projectId);
-                } else { // Closing
-                    const data = workSlideshowData[projectId];
-                    const container = data ? data.containerElement : (item.querySelector('.slideshow-container'));
-                    if (container) {
-                        item.classList.add('closing');
-                        stopWorkAutoSlide(projectId);
-                        const curH = container.getBoundingClientRect().height || container.clientHeight || 0;
-                        await animateHeightTo(container, curH, 0);
-                        container.style.height = '';
-                        item.classList.remove('closing');
-                        detachResizeObserver(container);
-                    }
-                    item.classList.remove('active');
-                    list.classList.remove('item-active');
-                    startPreviewAutoSlide(projectId);
-                }
-            });
-        });
-
-        // Initialize defensive
-        workProjectItems.forEach(p => {
-            const id = p.getAttribute('data-project-id');
-            if (!previewSlideshowData[id] || !previewSlideshowData[id].previewTimer) startPreviewAutoSlide(id);
-        });
-
-        // =================================================================
-        // DEEP LINKING HANDLER (New Logic)
-        // =================================================================
-        window.addEventListener('load', () => {
-            const hash = window.location.hash.substring(1); // Remove the '#'
-            if (!hash) return;
-
-            // 1. Check Personal Projects
-            const personalCard = document.querySelector(`.card[data-personal-id="${hash}"]`);
-            if (personalCard) {
-                showView('view-personal');
-                
-                // Expand the card
-                if (!personalCard.classList.contains('expanded')) {
-                    personalCard.classList.add('expanded');
-                    // Update the button text
-                    const btnText = personalCard.querySelector('.personal-toggle-bar span');
-                    if (btnText) btnText.textContent = 'Hide Details';
-                }
-
-                // Scroll into view with a slight delay to allow layout to settle
-                setTimeout(() => {
-                    personalCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 300);
-                return;
-            }
-
-            // 2. Check Work Projects
-            const workItem = document.querySelector(`.project-item[data-project-id="${hash}"]`);
-            if (workItem) {
-                showView('view-work');
-                
-                // Trigger the click on the preview to open the accordion
-                const preview = workItem.querySelector('.project-preview');
-                if (preview) {
-                    // We wait a moment for the view transition
-                    setTimeout(() => {
-                        preview.click();
-                        setTimeout(() => {
-                            workItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }, 300);
-                    }, 100);
-                }
-                return;
-            }
-        });
-
-    </script>
 </body>
 </html>
