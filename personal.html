@@ -58,9 +58,9 @@
     
     .projects {
       display: grid;
-      grid-template-columns: 1fr; /* Single column stack */
+      grid-template-columns: 1fr; 
       gap: 35px;
-      max-width: 900px; /* Constrained width for readability */
+      max-width: 900px; 
       margin: 0 auto;
     }
     
@@ -74,14 +74,19 @@
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     }
-    /* Slight lift on hover is okay, but kept minimal */
     .card:hover {
       box-shadow: 0 6px 20px rgba(0, 0, 255, 0.1);
     }
     
     .meta { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px; font-style: italic; }
     .card p { margin-bottom: 10px; color: #495057; }
-    .card strong { color: var(--primary-blue); font-weight: 600; display: block; margin-bottom: 5px; }
+    
+    /* FIXED: Removed display:block so bold text stays inline */
+    .card strong { 
+        color: var(--primary-blue); 
+        font-weight: 600; 
+    }
+    
     .links { margin-top: auto; }
 
     .card p a {
@@ -104,7 +109,7 @@
         opacity: 0;
     }
     .card.expanded .description-wrapper {
-        max-height: 4000px; /* Large enough to show all content */
+        max-height: 4000px; 
         opacity: 1;
     }
     
@@ -165,17 +170,15 @@
         margin-bottom: 15px;
         overflow: hidden; 
         border-radius: 12px;
-        background-color: #ffffff; /* Pure white background */
+        background-color: #ffffff; 
     }
     .slide { display: none; width: 100%; animation: fadeEffect 0.8s ease; }
     
-    /* Fixed Image Styling to prevent cropping */
+    /* Fixed Image Styling */
     .slide img { 
         display: block; 
         width: 100%; 
-        /* Taller height to accommodate vertical photos without buttons jumping */
         height: 550px; 
-        /* Ensure entire image is visible */
         object-fit: contain; 
         object-position: center;
         background-color: #ffffff;
@@ -191,7 +194,7 @@
         transform: translateY(-50%); 
         width: auto; 
         padding: 16px; 
-        color: #333; /* Darker arrows for visibility on white */
+        color: #333; 
         font-weight: bold; 
         font-size: 20px; 
         background-color: rgba(255, 255, 255, 0.5); 
@@ -226,7 +229,7 @@
     /* --- Responsive Adjustments --- */
     @media (max-width: 768px) {
         .prev, .next { font-size: 16px; padding: 12px; }
-        .slide img { height: 350px; /* Smaller fixed height for mobile */ }
+        .slide img { height: 350px; }
     }
   </style>
 </head>
@@ -245,10 +248,8 @@
         <div class="slide active"><img src="images/cover_final.png" alt="Project Overview: CAD model, hand-tracking AI interface, and the finalized robotic hand"></div>
         <div class="slide"><img src="images/peace.png" alt="Real-time Demo: V1.1 hand successfully mimicking a 'peace' gesture via the Pi's AI interface"></div>
         <div class="slide"><img src="images/handfrontback.png" alt="Mechanical Detail: Front and back views showcasing the custom 10-DOF antagonistic tendon design"></div>
-        <!-- NEW IMAGE INSERTED HERE -->
         <div class="slide"><img src="images/cad.png" alt="Internal Engineering: Seamless channels embedded for tendon and actuator routing"></div>
         <div class="slide"><img src="images/iterations.png" alt="Design Evolution: A timeline of 3D-printed prototypes from initial drafts to the current V1.1 model"></div>
-        
         <a class="prev" onclick="manualSlideChange('robot-hand-project', -1)">&#10094;</a>
         <a class="next" onclick="manualSlideChange('robot-hand-project', 1)">&#10095;</a>
       </div>
@@ -317,7 +318,7 @@
         <a class="prev" onclick="manualSlideChange('controller-project', -1)">&#10094;</a>
         <a class="next" onclick="manualSlideChange('controller-project', 1)">&#10095;</a>
       </div>
-      <div class="caption-container"></div> 
+      <div class="caption-container">CAD rendering of the initial controller design</div> 
       
       <h3>Arduino-Matlab Video Game System</h3>
       <p class="meta">Skills: Mechanical Design, 3D Printing, MATLAB, Arduino, ODEs</p>
