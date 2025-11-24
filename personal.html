@@ -80,13 +80,7 @@
     
     .meta { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 15px; font-style: italic; }
     .card p { margin-bottom: 10px; color: #495057; }
-    
-    /* FIXED: Removed display:block so bold text stays inline */
-    .card strong { 
-        color: var(--primary-blue); 
-        font-weight: 600; 
-    }
-    
+    .card strong { color: var(--primary-blue); font-weight: 600; display: block; margin-bottom: 5px; }
     .links { margin-top: auto; }
 
     .card p a {
@@ -109,7 +103,7 @@
         opacity: 0;
     }
     .card.expanded .description-wrapper {
-        max-height: 4000px; 
+        max-height: 5000px; 
         opacity: 1;
     }
     
@@ -302,6 +296,26 @@
               <p>
                 <strong>Results (In Progress):</strong> The V1.1 prototype is fully functional. The computer vision pipeline, adaptive control logic, and live-streaming video feedback systems are complete and tuned. The mechanical assembly has successfully demonstrated real-time gesture mimicry, and I am currently engineering <strong>Version 3.0</strong> to integrate a 2-DOF thumb for opposition and a 2-DOF wrist for complex manipulation.
               </p>
+
+              <!-- === YOUTUBE EMBED SECTION (Optimized for Shorts) === -->
+              <div style="margin-top: 40px; text-align: center;">
+                 <p style="margin-bottom: 15px; color: #6c757d; font-style: italic;">Watch the project in action:</p>
+                 <!-- Center container with constrained width for vertical video -->
+                 <div style="max-width: 350px; margin: 0 auto; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                     <!-- Aspect Ratio Container for 9:16 Vertical Video -->
+                     <div style="position: relative; padding-bottom: 177.77%; height: 0;">
+                        <iframe 
+                          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" 
+                          src="https://www.youtube.com/embed/rpR4bZ40Gxs" 
+                          title="Robot Hand Demo" 
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                          allowfullscreen>
+                        </iframe>
+                     </div>
+                 </div>
+              </div>
+              <!-- === END YOUTUBE EMBED === -->
+
           </div>
       </div>
     </article>
