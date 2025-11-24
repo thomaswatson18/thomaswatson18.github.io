@@ -141,7 +141,7 @@
         header {
             text-align: center;
             max-width: 800px;
-            margin: 20px auto 40px auto;
+            margin: 20px auto 40px auto; /* Reduced from 70px top / 60px bottom */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -290,9 +290,10 @@
             margin: 0 auto;
         }
 
+        /* --- MODIFIED: Personal Projects Vertical Stack --- */
         #view-personal .projects {
-            grid-template-columns: 1fr; 
-            max-width: 900px; 
+            grid-template-columns: 1fr; /* Stack vertically */
+            max-width: 900px; /* Constrain width */
         }
 
         /* Card Styles */
@@ -428,11 +429,19 @@
             margin-bottom: 15px;
             overflow: hidden; 
             border-radius: 12px;
-            background-color: #eee; 
+            background-color: #ffffff; /* Changed to pure white */
             transition: height 0.45s cubic-bezier(0.2,0,0.2,1);
         }
         .personal-slide { display: none; width: 100%; animation: fadeEffect 0.8s ease; }
-        .personal-slide img { display: block; width: 100%; height: auto; max-height: 550px; object-fit: cover; }
+        
+        /* FIX: contain object fit + fixed height to allow full visibility for tall images */
+        .personal-slide img { 
+            display: block; 
+            width: 100%; 
+            height: 550px; /* Increased height to prevent jumping */
+            object-fit: contain; 
+            object-position: center;
+        }
         .personal-slide.active { display: block; }
 
         .work-slide {
@@ -445,10 +454,10 @@
         @keyframes fadeEffect { from { opacity: 0.4; } to { opacity: 1; } }
         
         .prev, .next { 
-            cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto; padding: 16px; color: white; font-weight: bold; font-size: 20px; background-color: rgba(0, 0, 0, 0.3); border-radius: 0 3px 3px 0; user-select: none; transition: background-color 0.3s ease; z-index: 10;
+            cursor: pointer; position: absolute; top: 50%; transform: translateY(-50%); width: auto; padding: 16px; color: #333; font-weight: bold; font-size: 20px; background-color: rgba(255, 255, 255, 0.5); border-radius: 0 3px 3px 0; user-select: none; transition: background-color 0.3s ease; z-index: 10;
         }
         .next { right: 0; border-radius: 3px 0 0 3px; }
-        .prev:hover, .next:hover { background-color: rgba(0, 0, 0, 0.6); }
+        .prev:hover, .next:hover { background-color: rgba(255, 255, 255, 0.8); }
 
         .caption-container { 
             text-align: center; padding: 10px 0 5px 0; color: var(--text-secondary); font-size: 0.9rem; min-height: 1.5em; font-style: italic; transition: opacity 0.15s ease-in-out; 
@@ -476,6 +485,7 @@
             .project-preview h3 { font-size: 1.1rem; padding-right: 30px; } 
             .preview-company-logo { height: 16px; } 
             .prev, .next { font-size: 16px; padding: 12px; }
+            .personal-slide img { height: 300px; }
         }
     </style>
 </head>
@@ -499,6 +509,7 @@
                     <a href="#" title="RTX"><img src="images/logo-rtx.png" alt="RTX logo" onerror="this.src='https://placehold.co/140x35?text=RTX'"></a>
                     <a href="#" title="Dalhousie"><img src="images/logo-dalhousie.png" alt="Dalhousie logo" onerror="this.src='https://placehold.co/140x35?text=Dalhousie'"></a>
                     <a href="#" title="DALIS"><img src="images/logo-dalis.png" alt="DALIS logo" onerror="this.src='https://placehold.co/140x35?text=DALIS'"></a>
+                    <!-- Duplicates for loop -->
                     <a href="#" title="Tesla"><img src="images/logo-tesla.png" alt="Tesla logo" onerror="this.src='https://placehold.co/140x35?text=Tesla'"></a>
                     <a href="#" title="Lockheed Martin"><img src="images/logo-lockheed.png" alt="Lockheed logo" onerror="this.src='https://placehold.co/140x35?text=Lockheed'"></a>
                     <a href="#" title="RTX"><img src="images/logo-rtx.png" alt="RTX logo" onerror="this.src='https://placehold.co/140x35?text=RTX'"></a>
@@ -537,7 +548,6 @@
                         <div class="highlight-overlay"><span>Cybertruck Robotic Cell Re-Design @ Tesla</span></div>
                     </a>
                     <a href="personal.html#controller-project" class="highlight-item">
-                        <!-- ADDED: style="object-fit: contain; background-color: #fff;" to zoom out -->
                         <img src="images/controller-project.png" alt="Custom Arduino/Matlab Controller" style="object-fit: contain; background-color: #fff;" onerror="this.src='https://placehold.co/300x200?text=Controller'">
                          <div class="highlight-overlay"><span>Custom Arduino/MATLAB Video Game System</span></div>
                     </a>
@@ -641,7 +651,7 @@
                           </table>
                     
                           <p>
-                            <strong>Results (In Progress):</strong> The V1.1 prototype is fully functional. The computer vision pipeline, adaptive control logic, and live-streaming video feedback systems are complete and tuned. The mechanical assembly has successfully demonstrated real-time gesture mimicry, and I am currently engineering <strong>Version 3</strong> to integrate a 2-DOF thumb for opposition and a 2-DOF wrist for complex manipulation.
+                            <strong>Results (In Progress):</strong> The V1.1 prototype is fully functional. The computer vision pipeline, adaptive control logic, and live-streaming video feedback systems are complete and tuned. The mechanical assembly has successfully demonstrated real-time gesture mimicry, and I am currently engineering <strong>Version 3.0</strong> to integrate a 2-DOF thumb for opposition and a 2-DOF wrist for complex manipulation.
                           </p>
                       </div>
                   </div>
