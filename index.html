@@ -266,12 +266,60 @@
         }
         footer p { margin-bottom: 10px; }
         
+        /* --- RESUME UNAVAILABLE OVERLAY STYLES --- */
+        #resume-unavailable {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: calc(100vh - 70px);
+            margin-top: 70px;
+            text-align: center;
+            padding: 20px;
+        }
+        #resume-unavailable h1 { 
+            font-weight: 600; 
+            font-size: 2.5rem; 
+            margin-bottom: 15px; 
+            letter-spacing: 1px;
+        }
+        #resume-unavailable p { 
+            color: var(--text-secondary); 
+            font-size: 1.1rem; 
+            max-width: 500px; 
+            margin-bottom: 35px; 
+            line-height: 1.6; 
+        }
+        .btn-home {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid var(--primary-blue);
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .btn-home:hover {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 255, 0.15);
+        }
+        .icon-gear { 
+            font-size: 3.5rem; 
+            margin-bottom: 20px; 
+            opacity: 0.8;
+        }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .top-bar { height: auto; flex-direction: column; position: static; }
             .static-nav-links { width: 100%; justify-content: center; padding: 10px; border-bottom: 1px solid var(--border-light); }
             .scrolling-logos { -webkit-mask-image: none; mask-image: none; padding: 20px 0; margin-bottom: 0; }
             .main-content { margin-top: 0; }
+            #resume-unavailable { height: 80vh; margin-top: 0; }
         }
     </style>
 </head>
@@ -279,7 +327,8 @@
 
     <div class="top-bar">
         <nav class="static-nav-links">
-            <a href="images/resume.pdf" target="_blank">Resume</a>
+            <!-- Updated to trigger the JavaScript function -->
+            <a href="#" onclick="toggleResume(event)">Resume</a>
             <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
             <a href="mailto:thomaswatson1188@gmail.com">Email</a>
         </nav>
@@ -312,8 +361,17 @@
             </div>
         </section>
     </div>
+
+    <!-- NEW UNAVAILABLE SECTION (Hidden by default) -->
+    <div id="resume-unavailable">
+        <div class="icon-gear">⚙️</div>
+        <h1>Resume Offline</h1>
+        <p>My resume has been temporarily taken back to the shop for routine recalibration, structural upgrades, and aerodynamic testing. Please check back soon!</p>
+        <a class="btn-home" onclick="toggleResume(event)">&larr; Return to Home</a>
+    </div>
     
-    <div class="main-content">
+    <!-- MAIN CONTENT (Given an ID for JS targeting) -->
+    <div class="main-content" id="main-content">
         <header>
             <img src="images/headshot.jpg" alt="Thomas Watson headshot" class="headshot" onerror="this.src='https://placehold.co/150x150?text=Thomas+W'">
             <h1>Thomas Watson</h1>
@@ -372,5 +430,28 @@
         </footer>
     </div>
 
+    <!-- SCRIPT FOR TOGGLING VIEWS -->
+    <script>
+        function toggleResume(e) {
+            if (e) e.preventDefault();
+            
+            const mainContent = document.getElementById('main-content');
+            const unavailablePage = document.getElementById('resume-unavailable');
+            const scrollingLogos = document.querySelector('.scrolling-logos');
+
+            if (unavailablePage.style.display === 'flex') {
+                // Restore main page
+                unavailablePage.style.display = 'none';
+                mainContent.style.display = 'block';
+                if(scrollingLogos) scrollingLogos.style.display = 'block';
+                window.scrollTo(0, 0);
+            } else {
+                // Show unavailable page
+                mainContent.style.display = 'none';
+                if(scrollingLogos) scrollingLogos.style.display = 'none';
+                unavailablePage.style.display = 'flex';
+            }
+        }
+    </script>
 </body>
 </html>
