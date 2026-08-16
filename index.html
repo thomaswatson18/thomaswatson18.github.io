@@ -282,6 +282,7 @@
             font-size: 2.5rem; 
             margin-bottom: 15px; 
             letter-spacing: 1px;
+            color: var(--text-primary);
         }
         #resume-unavailable p { 
             color: var(--text-secondary); 
@@ -307,11 +308,6 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(0, 0, 255, 0.15);
         }
-        .icon-gear { 
-            font-size: 3.5rem; 
-            margin-bottom: 20px; 
-            opacity: 0.8;
-        }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
@@ -327,7 +323,6 @@
 
     <div class="top-bar">
         <nav class="static-nav-links">
-            <!-- Updated to trigger the JavaScript function -->
             <a href="#" onclick="toggleResume(event)">Resume</a>
             <a href="https://linkedin.com/in/thomaswatsonn" target="_blank">LinkedIn</a>
             <a href="mailto:thomaswatson1188@gmail.com">Email</a>
@@ -364,9 +359,8 @@
 
     <!-- NEW UNAVAILABLE SECTION (Hidden by default) -->
     <div id="resume-unavailable">
-        <div class="icon-gear">⚙️</div>
-        <h1>Resume Offline</h1>
-        <p>My resume has been temporarily taken back to the shop for routine recalibration, structural upgrades, and aerodynamic testing. Please check back soon!</p>
+        <h1>Resume Unavailable</h1>
+        <p>My resume is currently unavailable. Please check back later, or reach out via email or LinkedIn for a copy.</p>
         <a class="btn-home" onclick="toggleResume(event)">&larr; Return to Home</a>
     </div>
     
